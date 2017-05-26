@@ -14,17 +14,17 @@
     <one-to-many field="comments" target-entity="Comment" mapped-by="post" />
     <many-to-many field="tags" target-entity="Tag" />
     <!-- For embedded fields, always include column-prefix of field value  -->
-    <embedded name="author" class="BlogBundle\Entity\Author" column-prefix="author" />
+    <embedded name="author" class="BlogBundle\Entity\Author" column-prefix="author_" />
+    <lifecycle-callbacks>
+      <lifecycle-callback type="prePersist" method="prePersist" />
+      <lifecycle-callback type="preUpdate" method="preUpdate" />
+    </lifecycle-callbacks>
     <!-- 
     <one-to-many field="productHasCategories" target-entity="ProductHasCategory" mapped-by="product">
     <cascade>
       <cascade-all/>
     </cascade> 
-    </one-to-many>
-    <lifecycle-callbacks>
-      <lifecycle-callback type="prePersist" method="prePersist" />
-      <lifecycle-callback type="preUpdate" method="preUpdate" />
-    </lifecycle-callbacks>  -->
+    </one-to-many>  -->
   </entity>
 
 </doctrine-mapping>

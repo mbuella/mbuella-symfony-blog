@@ -28,15 +28,17 @@ class PostAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('title')
+            ->addIdentifier('title', null, array(
+                         'route' => array(
+                             'name' => 'show'
+                         )
+                     ))
             ->add('author.name')
-            ->add('enabled')
             ->add('abstract')
-            ->add('content')
             ->add('tags')
+            ->add('enabled')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
@@ -55,6 +57,7 @@ class PostAdmin extends AbstractAdmin
                 ->add('title')
                 ->add('abstract')
                 ->add('content')
+                ->add('author.name')
             ->end()
             ->with('Tags')
                 ->add('tags', 'sonata_type_model', array('expanded' => true, 'multiple' => true))
@@ -62,9 +65,9 @@ class PostAdmin extends AbstractAdmin
             ->with('Comments')
                 ->add('comments', 'sonata_type_model', array('multiple' => true))
             ->end()
-            ->with('System Information', array('collapsed' => true))
-                ->add('created_at')
-            ->end()
+            // ->with('System Information', array('collapsed' => true))
+            //     ->add('createdAt')
+            // ->end()
         ;
     }
 

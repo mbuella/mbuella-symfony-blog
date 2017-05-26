@@ -43,7 +43,13 @@ class CommentAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         if(!$this->isChild()) {
-            $formMapper->add('post', 'sonata_type_model', array(), array('edit' => 'list'));
+            $formMapper
+                // ->add('post', 'sonata_type_collection', array(), array('edit' => 'list'));
+                ->add('post', 'sonata_type_model', array(                    
+                    'class' => 'BlogBundle\Entity\Post',
+                    'property' => 'title',
+                ))
+            ;
         }
 
         $formMapper

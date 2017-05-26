@@ -64,8 +64,6 @@ class Post
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-        // Initialize author
-        $this->author = new Author;
     }
 
     /**
@@ -328,8 +326,8 @@ class Post
         $this->updatedAt = new \DateTime;
     }
 
-    public function __toString()
+/*    public function __toString()
     {
-        return $this->title ? $this->title : 'New Post';
-    }
+        return $this->title;
+    }*/
 }

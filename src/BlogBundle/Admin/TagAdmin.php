@@ -28,7 +28,11 @@ class TagAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
+            ->addIdentifier('name', null, array(
+                         'route' => array(
+                             'name' => 'show'
+                         )
+                     ))
             ->add('enabled')
         ;
     }
@@ -52,7 +56,6 @@ class TagAdmin extends AbstractAdmin
         $showMapper
             ->add('name')
             ->add('enabled')
-            ->add('id')
         ;
     }
 
@@ -65,7 +68,9 @@ class TagAdmin extends AbstractAdmin
     {
         $errorElement
             ->with('name')
-                ->assertMaxLength(array('limit' => 32))
+                ->assertLength(
+                    array('max' => 32)
+                )
             ->end()
         ;
     }

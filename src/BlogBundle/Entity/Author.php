@@ -36,5 +36,10 @@ class Author
     {
         return $this->name;
     }
+
+    public function __toString()
+    {
+        return $this->name ? $this->name : 'New Author';
+    }
 }
 
