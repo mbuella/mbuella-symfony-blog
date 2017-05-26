@@ -1,0 +1,11 @@
+blog:
+    resource: "@BlogBundle/Resources/config/routing.xml"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+    
+admin_area:
+    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
+    prefix: /admin
