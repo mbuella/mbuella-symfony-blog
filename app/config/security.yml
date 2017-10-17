@@ -15,6 +15,10 @@ security:
 
         main:
             anonymous: ~
+            guard:
+                authenticators:
+                    - app.form_login_authenticator
+                entry_point: app.form_login_authenticator
             # activate different ways to authenticate
 
             # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
