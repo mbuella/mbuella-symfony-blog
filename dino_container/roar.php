@@ -21,7 +21,7 @@ if (!file_exists($cachedContainer))
 	$container->setParameter('root_dir', __DIR__);
 
 	$loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/config'));
-	$loader->load('services.yml');
+	$loader->load('config.yml');
 
 
 	$container->compile();

@@ -1,0 +1,2 @@
+parameters:
+    logger_startup_message: 'Logger has been started!'

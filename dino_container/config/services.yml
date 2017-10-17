@@ -1,6 +1,3 @@
-parameters:
-    logger_startup_message: 'Logger has been started!'
-
 services:
     logger:
         class: Monolog\Logger
