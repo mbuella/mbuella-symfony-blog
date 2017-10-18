@@ -14,3 +14,11 @@ services:
             - '@form.factory'
             - '@doctrine.orm.default_entity_manager'
             - '@router'
+            - '@security.password_encoder'
+            
+    app.doctrine.hash_password_listener:
+        class: AppBundle\Doctrine\HashPasswordListener
+        arguments:
+            - '@security.password_encoder'
+        tags:
+            - { name: doctrine.event_subscriber }

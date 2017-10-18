@@ -10,7 +10,11 @@
         <!-- <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" /> -->
     </head>
     <body>
-		<a href="{{ path('security_login') }}">Login</a>
+		{% if is_granted('ROLE_USER') %}
+			<a href="{{ path('security_logout') }}">Logout</a>
+        {% else %}
+			<a href="{{ path('security_login') }}">Login</a>
+		{% endif %}
         <div class="main-content">
 		{% for msg in app.session.flashBag.get('success') %}
 			<div class="alert alert-success">

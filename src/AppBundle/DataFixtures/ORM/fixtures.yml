@@ -1,3 +1,4 @@
 AppBundle\Entity\User:
     user_{1..10}:
         email: test_<current()>@gmail.com
+        plainPassword: iliketurtles

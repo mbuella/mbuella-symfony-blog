@@ -8,22 +8,32 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
 class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 {
 	private $formFactory;
 	private $em;
 	private $router;
+	private $passwordEncoder;
 
-	public function __construct(FormFactoryInterface $formFactory, EntityManager $em, Router $router)
+	public function __construct(
+		FormFactoryInterface $formFactory,
+		EntityManager $em,
+		Router $router,
+		UserPasswordEncoder $passwordEncoder
+	)
 	{
         $this->formFactory = $formFactory;
         $this->em = $em;
         $this->router = $router;
+        $this->passwordEncoder = $passwordEncoder;
 	}
     public function getCredentials(Request $request)
     {
@@ -38,7 +48,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 		
 		$data = $form->getData();
 		
-		// dump($data);die();
+        $request->getSession()->set(
+            Security::LAST_USERNAME,
+            $data['_username']
+        );
 		
 		return $data;
     }
@@ -54,9 +67,10 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 		// dump($user);die();
 		$password = $credentials['_password'];
 		
-		if ($password == 'iliketurtles') {
+		if ($this->passwordEncoder->isPasswordValid($user, $password)) {
             return true;
         }
+		
         return false;
     }
     protected function getLoginUrl()
